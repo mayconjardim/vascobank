@@ -6,6 +6,6 @@ import com.vascobank.entities.Conta;
 
 public interface ContaRepository extends JpaRepository<Conta, Long> {
 
-
+	Conta findByUserId(Long userId);
 
 }

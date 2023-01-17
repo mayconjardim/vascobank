@@ -17,7 +17,7 @@ public class ContatoResource {
     @Autowired
     private ContatoRepository contatoRepository;
 
-    @PostMapping("/contato")
+    @PostMapping("/contatos")
     public Contato saveContatoDetalhes(@RequestBody Contato contato) {
     	contato.setContatoId(getNumeroDeSolicitacao());
     	contato.setDataCriacao(new Date(System.currentTimeMillis()));

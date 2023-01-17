@@ -5,30 +5,35 @@ import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Noticia implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long noticiaId;
 	private String noticiaResumo;
 	private String noticiaDetalhes;
 	private Date dataInicio;
-	private Date dateTermino;
+	private Date dataTermino;
 	private Date dataCriacao;
 	private Date dataAtualizacao;
 
 	public Noticia() {
 	}
 
-	public Noticia(Long noticiaId, String noticiaResumo, String noticiaDetalhes, Date dataInicio, Date dateTermino,
+	public Noticia(Long noticiaId, String noticiaResumo, String noticiaDetalhes, Date dataInicio, Date dataTermino,
 			Date dataCriacao, Date dataAtualizacao) {
 		super();
 		this.noticiaId = noticiaId;
 		this.noticiaResumo = noticiaResumo;
 		this.noticiaDetalhes = noticiaDetalhes;
 		this.dataInicio = dataInicio;
-		this.dateTermino = dateTermino;
+		this.dataTermino = dataTermino;
 		this.dataCriacao = dataCriacao;
 		this.dataAtualizacao = dataAtualizacao;
 	}
@@ -65,12 +70,12 @@ public class Noticia implements Serializable {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDateTermino() {
-		return dateTermino;
+	public Date getDataTermino() {
+		return dataTermino;
 	}
 
-	public void setDateTermino(Date dateTermino) {
-		this.dateTermino = dateTermino;
+	public void setDataTermino(Date dataTermino) {
+		this.dataTermino = dataTermino;
 	}
 
 	public Date getDataCriacao() {

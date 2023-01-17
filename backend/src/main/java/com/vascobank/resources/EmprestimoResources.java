@@ -18,7 +18,7 @@ public class EmprestimoResources {
 
     @GetMapping("/emprestimos")
     public List<Emprestimos> getDetalhesEmprestimos(@RequestParam Long id) {
-        List<Emprestimos> emp = emprestimosRepository.findByUserIdOrderBydataCriacaoDesc(id);
+        List<Emprestimos> emp = emprestimosRepository.findByUserIdOrderByDataCriacaoDesc(id);
         if (emp != null ) {
             return emp;
         }else {

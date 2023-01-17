@@ -8,6 +8,6 @@ import com.vascobank.entities.Emprestimos;
 
 public interface EmprestimosRepository extends JpaRepository<Emprestimos, Long> {
 
-	List<Emprestimos> findByUserIdOrderBydataCriacaoDesc(Long userId);
+	List<Emprestimos> findByUserIdOrderByDataCriacaoDesc(Long userId);
 
 }

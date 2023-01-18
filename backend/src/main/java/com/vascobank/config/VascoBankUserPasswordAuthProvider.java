@@ -2,6 +2,7 @@ package com.vascobank.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.vascobank.entities.Authorities;
 import com.vascobank.entities.User;
 import com.vascobank.repositories.UserRepository;
 
@@ -33,15 +35,22 @@ public class VascoBankUserPasswordAuthProvider implements AuthenticationProvider
 	        List<User> user = userRepository.findByEmail(username);
 	        if (user.size() > 0) {
 	            if (passwordEncoder.matches(password, user.get(0).getPassword())) {
-	                List<GrantedAuthority> authorities = new ArrayList<>();
-	                authorities.add(new SimpleGrantedAuthority(user.get(0).getRole()));
-	                return new UsernamePasswordAuthenticationToken(username, password, authorities);
+	               
+	                return new UsernamePasswordAuthenticationToken(username, password, getGrantedAuthorities(user.get(0).getAuthorities()));
 	            } else {
 	                throw new BadCredentialsException("Senha invalida!");
 	            }
 	        }else {
 	            throw new BadCredentialsException("Usuario não encontrado!");
 	        }
+	    }
+	   
+	   private List<GrantedAuthority> getGrantedAuthorities(Set<Authorities> authorities) {
+	        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+	        for (Authorities authority : authorities) {
+	            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+	        }
+	        return grantedAuthorities;
 	    }
 
 	    @Override
